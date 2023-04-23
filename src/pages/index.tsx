@@ -1,8 +1,9 @@
+import Banner from "@/components/banner";
 import Head from "next/head";
 
 const Home = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="min-h-screen">
       <Head>
         <title>Nextflix</title>
         <meta
@@ -11,7 +12,11 @@ const Home = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>NEXTFLIX</h1>
+      <Banner
+        title="Inglourious Basterds"
+        subtitle="In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same."
+        image="/static/temp/banner_image.jpg"
+      />
     </main>
   );
 };
