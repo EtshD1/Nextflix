@@ -8,7 +8,7 @@ interface Props {
 
 const Banner = (props: Props) => {
   return (
-    <div className="flex p-4 lg:p-8 min-h-[40rem]">
+    <div className="flex p-4 lg:p-8 pt-0 min-h-[40rem]">
       <div className="relative flex basis-full flex-col justify-end">
         <div className="absolute top-0 left-0 right-0 bottom-12 lg:bottom-0 rounded-lg overflow-hidden">
           <Image
