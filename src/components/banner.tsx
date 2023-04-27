@@ -15,7 +15,7 @@ const Banner = (props: Props) => {
             src={props.image}
             alt={`${props.title} cover image`}
             fill
-            sizes=""
+            sizes="100vw"
             className="object-cover object-top z-10"
           />
           <div className="absolute bg-gradient-to-b lg:bg-gradient-to-l lg:opacity-60 from-transparent to-black top-[60%] lg:top-0 left-0 right-0 bottom-0 z-20"></div>

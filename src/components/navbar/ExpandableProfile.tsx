@@ -8,10 +8,10 @@ const ExpandableProfile = () => {
           <div className="relative w-12 h-12">
             <Image
               src="/static/temp/user.jpg"
+              sizes="3rem"
               alt="User Image"
               className="rounded-full ring-1 object-cover ring-white"
               fill
-              sizes=""
             />
           </div>
           <div>
@@ -30,7 +30,7 @@ const ExpandableProfile = () => {
                 src="/icons/signout.svg"
                 alt="Sign out Icon"
                 fill
-                sizes=""
+                sizes="2rem"
               />
             </div>
           </button>

@@ -19,7 +19,7 @@ const MainInfo = (props: { toggleMenu: () => void }) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
     if (!mouseIn) {
-      const timeoutId = setTimeout(() => setActiveMenu(false), 1000);
+      const timeoutId = setTimeout(() => setActiveMenu(false), 750);
       timeoutRef.current = timeoutId;
     }
   }, [mouseIn, timeoutRef.current, activeMenu]);
@@ -49,7 +49,7 @@ const MainInfo = (props: { toggleMenu: () => void }) => {
               src="/static/temp/user.jpg"
               alt="User Image"
               className="object-cover w-8 h-8 ring-white"
-              sizes=""
+              sizes="2rem"
               width={32}
               height={32}
             />
@@ -59,7 +59,7 @@ const MainInfo = (props: { toggleMenu: () => void }) => {
               className={`w-4 h-4 transition-all ease-out duration-300 ${
                 activeMenu ? "rotate-180" : ""
               }`}
-              sizes=""
+              sizes="1rem"
               width={16}
               height={16}
             />
