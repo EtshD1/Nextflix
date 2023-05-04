@@ -7,7 +7,7 @@ interface Props {
     imageSrc: string;
     description: string;
   }[];
-  size: "small" | "medium" | "large";
+  size: CardSize;
   title: string;
 }
 
