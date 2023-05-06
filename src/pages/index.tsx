@@ -1,34 +1,44 @@
 import Banner from "@/components/banner";
 import Navbar from "@/components/navbar";
 import Section from "@/components/section";
-// import getVideos from "@/lib/getVideos";
-import { google } from "googleapis";
+import getVideos from "@/lib/getVideos";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 interface PageProps {
-  videos: Video[];
+  sections: {
+    title: string;
+    size: CardSize;
+    videos: Video[];
+  }[];
 }
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
-  const youtubeKey = process.env.YOUTUBE_API_KEY;
-  if (youtubeKey === undefined) throw new Error("Key does not exist");
-  const youtube = google.youtube("v3");
-
-  const vids = await youtube.search.list({
-    part: ["snippet"],
-    q: "Quentin Tarantino",
-    maxResults: 5,
-    key: youtubeKey,
-  });
+  const vids = await Promise.all([
+    getVideos("Inglourious Basterds"),
+    getVideos("Django Unchained"),
+    getVideos("Once upon a time in hollywood"),
+  ]);
 
   return {
     props: {
-      videos: vids.data.items!.map((v) => ({
-        title: v.snippet!.title!,
-        description: v.snippet!.description!,
-        imageSrc: v.snippet!.thumbnails!.high!.url!,
-      })),
+      sections: [
+        {
+          title: "Inglourious Basterds",
+          size: "large",
+          videos: vids[0],
+        },
+        {
+          title: "Django Unchained",
+          size: "medium",
+          videos: vids[1],
+        },
+        {
+          title: "Once upon a time in hollywood",
+          size: "small",
+          videos: vids[2],
+        },
+      ],
     },
   };
 };
@@ -51,16 +61,16 @@ const Home = (props: PageProps) => {
         subtitle="In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same."
         image="/static/temp/banner_image.jpg"
       />
-      <Section
-        title="Must Watch"
-        size="large"
-        items={props.videos.map((v, i) => ({ ...v, id: i.toString() }))}
-      />
-      <Section
-        title="Must Watch"
-        size="small"
-        items={props.videos.map((v, i) => ({ ...v, id: i.toString() }))}
-      />
+      {props.sections.map((s, i) => {
+        return (
+          <Section
+            key={`${s}:${i}`}
+            size={s.size}
+            title={s.title}
+            items={s.videos}
+          />
+        );
+      })}
     </main>
   );
 };

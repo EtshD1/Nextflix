@@ -2,33 +2,42 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-type Props = { size: CardSize } & Video;
+interface Props {
+  size: CardSize;
+  title: string;
+  imageSrc: string;
+  description: string;
+}
 
 const Card = (props: Props) => {
   const { size } = props;
   const [animating, setAnimating] = useState(false);
 
   return (
-    <div>
-      <motion.div
-        whileHover={{
-          scale: 1.1,
-          zIndex: 40,
-        }}
-        onAnimationStart={() => setAnimating(true)}
-        onAnimationComplete={() => setAnimating(false)}
-        transition={{
-          type: "spring",
-          stiffness: 260,
-          damping: 20,
-          duration: 10000,
-        }}
-        className={`group relative overflow-y-hidden cursor-pointer rounded-lg ${size === "large"
-            ? "w-[27.5rem] h-60"
-            : size === "short"
-              ? "w-56 h-96"
-              : "w-[23rem] h-52"
-          } ${animating ? "z-10" : ""} shadow-2xl`}
+    <motion.div
+      whileHover={{
+        scale: 1.1,
+        zIndex: 40,
+      }}
+      initial={{ zIndex: animating ? 30 : 20 }}
+      onAnimationStart={() => setAnimating(true)}
+      onAnimationComplete={() => setAnimating(false)}
+      transition={{
+        type: "spring",
+        stiffness: 260,
+        damping: 20,
+        duration: 10000,
+      }}
+      className={`group relative bg-gradient-to-b from-black to-neutral-950 rounded-lg shadow-2xl shadow-black`}
+    >
+      <div
+        className={`relative overflow-y-hidden cursor-pointer rounded-lg ${
+          size === "large"
+            ? "w-80 h-44 lg:w-[27.5rem] lg:h-60"
+            : size === "medium"
+            ? "w-80 h-44"
+            : "w-60 h-28"
+        }`}
       >
         <Image
           src={props.imageSrc}
@@ -37,24 +46,34 @@ const Card = (props: Props) => {
           sizes={
             size === "large"
               ? "30rem"
-              : size === "short"
-                ? "15.5rem"
-                : "25.5rem"
+              : size === "medium"
+              ? "15.5rem"
+              : "25.5rem"
           }
           className="object-cover object-center"
         />
-        <div className="transition-all ease-in-out duration-200 group-hover:duration-500 absolute group-hover:top-0 group-hover:bottom-0 top-full -bottom-full left-0 right-0 flex flex-col justify-end">
-          <div className="bg-neutral-950 bg-opacity-70 p-2">
-            <h4 className="font-bold">{props.title}</h4>
-            <p className="text-sm opacity-80">
+      </div>
+      <div className="z-50 transition-all ease-in-out duration-200 overflow-y-hidden group-hover:duration-500 lg:absolute group-hover:top-0 top-full bottom-0 left-0 right-0 flex flex-col justify-end">
+        <div className="bg-neutral-950 lg:bg-opacity-70 lg:p-2">
+          <h4
+            dangerouslySetInnerHTML={{
+              __html:
+                props.title.length > 40
+                  ? props.title.substring(0, 40) + "..."
+                  : props.title,
+            }}
+            className="font-medium"
+          ></h4>
+          {props.size === "large" && (
+            <p className="lg:block hidden text-sm opacity-80">
               {props.description.length > 65
                 ? `${props.description.substring(0, 65)}...`
                 : props.description}
             </p>
-          </div>
+          )}
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

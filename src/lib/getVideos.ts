@@ -1,58 +1,34 @@
-const getVideos = (): Video[] => [
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-  {
-    title: "Inglourious Basterds",
-    imageSrc: "/static/temp/card_image.jpg",
-    description:
-      "In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same.",
-  },
-];
+import { google } from "googleapis";
+
+const getVideos = async (query: string): Promise<Video[]> => {
+  const youtubeKey = process.env.YOUTUBE_API_KEY;
+  if (youtubeKey === undefined) throw new Error("Key does not exist");
+  const youtube = google.youtube("v3");
+
+  const vids = await youtube.search.list({
+    part: ["snippet"],
+    q: query,
+    maxResults: 5,
+    key: youtubeKey,
+    type: ["video"],
+  });
+
+  const value: Video[] = [];
+
+  vids.data.items &&
+    vids.data.items.forEach((v) => {
+      v.id &&
+        value.push({
+          id: v.id.videoId!,
+          title: v.snippet!.title!,
+          description: v.snippet!.description!,
+          imageSrc: v.snippet!.thumbnails!.high
+            ? v.snippet?.thumbnails?.high.url!
+            : "/static/temp/video_placeholder_small.jpg",
+        });
+    });
+
+  return value;
+};
 
 export default getVideos;
