@@ -3,7 +3,13 @@ import ExpandableMenu from "./ExpandableMenu";
 import ExpandableProfile from "./ExpandableProfile";
 import MainInfo from "./MainInfo";
 
-const Navbar = () => {
+interface Props {
+  user?: {
+    image: string;
+  };
+}
+
+const Navbar = (props: Props) => {
   const [active, setActive] = useState(false);
   const [scrollOff, setScrollOff] = useState(false);
 
@@ -32,9 +38,12 @@ const Navbar = () => {
           active || scrollOff ? "opacity-100" : "opacity-0"
         } top-0 bottom-0 left-0 right-0 absolute -z-10 duration-500 transition-all ease-out`}
       ></div>
-      <MainInfo toggleMenu={toggleMenu} />
+      <MainInfo
+        userImage={props.user && props.user.image}
+        toggleMenu={toggleMenu}
+      />
       <ExpandableMenu active={active} />
-      <ExpandableProfile />
+      {props.user && <ExpandableProfile userImage={props.user.image} />}
     </nav>
   );
 };
