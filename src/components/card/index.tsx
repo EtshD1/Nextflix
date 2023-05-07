@@ -28,10 +28,10 @@ const Card = (props: Props) => {
         damping: 20,
         duration: 10000,
       }}
-      className={`group relative bg-gradient-to-b from-black to-neutral-950 rounded-lg shadow-2xl shadow-black`}
+      className="group relative bg-gradient-to-b from-black to-neutral-950 rounded-lg shadow-2xl shadow-black flex flex-col gap-2"
     >
       <div
-        className={`relative overflow-y-hidden cursor-pointer rounded-lg ${
+        className={`relative overflow-y-hidden cursor-pointer rounded-t-lg lg:rounded-lg ${
           size === "large"
             ? "w-80 h-44 lg:w-[27.5rem] lg:h-60"
             : size === "medium"
