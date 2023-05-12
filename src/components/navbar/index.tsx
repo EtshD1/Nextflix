@@ -21,6 +21,10 @@ const Navbar = (props: Props) => {
 
     window.addEventListener("scroll", handleScroll);
 
+    window.addEventListener("load", () => {
+      if (window.scrollY >= 48) return setScrollOff(true);
+    });
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
