@@ -15,29 +15,29 @@ interface PageProps {
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const vids = await Promise.all([
-    getVideos("Inglourious Basterds"),
-    getVideos("Django Unchained"),
-    getVideos("Once upon a time in hollywood"),
+    // getVideos("Inglourious Basterds"),
+    // getVideos("Django Unchained"),
+    // getVideos("Once upon a time in hollywood"),
   ]);
 
   return {
     props: {
       sections: [
-        {
-          title: "Inglourious Basterds",
-          size: "large",
-          videos: vids[0],
-        },
-        {
-          title: "Django Unchained",
-          size: "medium",
-          videos: vids[1],
-        },
-        {
-          title: "Once upon a time in hollywood",
-          size: "small",
-          videos: vids[2],
-        },
+        // {
+        //   title: "Inglourious Basterds",
+        //   size: "large",
+        //   videos: vids[0],
+        // },
+        // {
+        //   title: "Django Unchained",
+        //   size: "medium",
+        //   videos: vids[1],
+        // },
+        // {
+        //   title: "Once upon a time in hollywood",
+        //   size: "small",
+        //   videos: vids[2],
+        // },
       ],
     },
   };
@@ -54,8 +54,9 @@ const Home = (props: PageProps) => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Navbar />
+      <header>
+        <Navbar />
+      </header>
       <Banner
         title="Inglourious Basterds"
         subtitle="In Nazi-occupied France during World War II, a plan to assassinate Nazi leaders by a group of Jewish U.S. soldiers coincides with a theatre owner's vengeful plans for the same."
