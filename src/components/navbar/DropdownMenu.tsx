@@ -10,7 +10,7 @@ const NavDropdownMenu = ({
       <div
         onMouseLeave={() => setMouseIn(false)}
         onMouseEnter={() => setMouseIn(true)}
-        className="absolute right-0 top-4 -bottom-20 bg-black bg-opacity-80 -left-36 border border-white border-solid border-opacity-25"
+        className="absolute right-0 top-4 -bottom-20 bg-black bg-opacity-80 w-48 border border-white border-solid border-opacity-25"
       >
         <ul className="flex flex-col h-full">
           <li className="grow px-4 flex gap-2 items-center hover:underline">

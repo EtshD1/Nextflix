@@ -1,23 +1,10 @@
 import Image from "next/image";
 
-interface Props {
-  userImage: string;
-}
-
-const ExpandableProfile = (props: Props) => {
+const ExpandableProfile = () => {
   return (
     <div className="shrink-0 pb-4 md:hidden">
       <div className="bg-white bg-opacity-25 rounded-full flex justify-between items-center">
         <div className="p-2 flex gap-4">
-          <div className="relative w-12 h-12">
-            <Image
-              src={props.userImage}
-              sizes="3rem"
-              alt="User Image"
-              className="rounded-full ring-1 object-cover ring-white"
-              fill
-            />
-          </div>
           <div>
             <div className="font-bold">User Name</div>
             <div className="opacity-80">View Profile</div>
