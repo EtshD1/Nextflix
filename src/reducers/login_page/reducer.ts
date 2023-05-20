@@ -23,7 +23,7 @@ const emailReducer = (
       return {
         email: state.email,
         isValid: state.isValid,
-        warnUser: state.warnUser,
+        warnUser: true,
       };
   }
 };
