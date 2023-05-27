@@ -55,7 +55,7 @@ const Home = (props: PageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
-        <Navbar />
+        <Navbar withAuth />
       </header>
       <Banner
         title="Inglourious Basterds"
