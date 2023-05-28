@@ -2,7 +2,7 @@ import { Bebas_Neue } from "next/font/google";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import NavDropdownMenu from "./DropdownMenu";
-import magic from "@/lib/magic";
+import Link from "next/link";
 
 interface Props {
 	toggleMenu: () => void;
@@ -40,7 +40,7 @@ const MainInfo = (props: Props) => {
 				{props.username && (
 					<ul className="md:flex gap-4 hidden">
 						<li className="hover:font-bold hover:underline">
-							Home
+							<Link href="/">Home</Link>
 						</li>
 						<li className="hover:font-bold hover:underline">
 							My List
