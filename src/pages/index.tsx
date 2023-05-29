@@ -15,7 +15,7 @@ interface PageProps {
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 	const vids = await Promise.all([
-		// getVideos("Inglourious Basterds"),
+		getVideos("Inglourious Basterds"),
 		// getVideos("Django Unchained"),
 		// getVideos("Once upon a time in hollywood"),
 	]);
@@ -23,11 +23,11 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
 	return {
 		props: {
 			sections: [
-				// {
-				// 	title: "Inglourious Basterds",
-				// 	size: "large",
-				// 	videos: vids[0],
-				// },
+				{
+					title: "Inglourious Basterds",
+					size: "large",
+					videos: vids[0],
+				},
 				// {
 				// 	title: "Django Unchained",
 				// 	size: "medium",
