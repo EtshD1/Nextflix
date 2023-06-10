@@ -40,7 +40,31 @@ const Login = () => {
 		SetLoading();
 		try {
 			const res = await m.auth.loginWithMagicLink({ email });
-			if (res) router.push("/");
+			if (res) {
+				fetch("/api/login", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						token: res,
+					}),
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						data.done
+							? router.push("/")
+							: WarnUser(
+									"Something went wrong, Please try again later"
+							  );
+					})
+					.catch((err) => {
+						console.error(err);
+						WarnUser(
+							"Something went wrong, Please try again later"
+						);
+					});
+			}
 		} catch (error) {
 			console.log(error);
 			if (error instanceof RPCError) {
@@ -108,7 +132,7 @@ const Login = () => {
 									<h2 className="font-bold text-2xl">
 										Log in or Sign up to continue
 									</h2>
-									<div className="relative flex flex-col gap-10">
+									<div className="relative flex flex-col gap-16">
 										<div className="flex flex-col relative group">
 											<label
 												htmlFor="email"

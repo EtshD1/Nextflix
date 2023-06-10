@@ -48,7 +48,11 @@ export default function App({ Component, pageProps }: AppProps) {
 					<FullPageLoader />
 				</div>
 			) : (
-				<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+				<motion.div
+					className="overflow-x-hidden w-screen"
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+				>
 					<style jsx global>
 						{`
 							html {
